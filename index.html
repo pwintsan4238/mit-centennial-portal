@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Myanmar Institute of Theology (MIT) — Centennial Portal</title>
+  <!-- Tailwind CSS CDN with forms & container-queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Padauk:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <!-- Material Symbols: CRITICAL EXACT LINK -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: {
+                950: '#071224',
+                900: '#061528',
+                850: '#0C1D36',
+                800: '#0B2240',
+                700: '#13335D',
+                600: '#1E3A5F',
+                500: '#2C5282',
+              },
+              gold: {
+                700: '#96721C',
+                600: '#AC8522',
+                500: '#C49A2C',
+                400: '#DEB54A',
+                100: '#FDF8E8',
+                50: '#FFFDF5',
+              },
+              beacon: {
+                700: '#0369A1',
+                600: '#0284C7',
+                500: '#0EA5E9',
+                400: '#38BDF8',
+                100: '#E0F2FE',
+              }
+            }
+          },
+          fontFamily: {
+            serif: ['Merriweather', 'Georgia', 'serif'],
+            sans: ['Montserrat', 'Inter', 'sans-serif'],
+            script: ['"Pinyon Script"', 'cursive'],
+            myanmar: ['Padauk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    section[id] { scroll-margin-top: 130px; }
+    .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+    .social-card { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .social-card:hover { transform: translateY(-6px); }
+    .social-card-facebook:hover { border-color: #1877F2; box-shadow: 0 14px 28px -4px rgba(24, 119, 242, 0.22); }
+    .social-card-youtube:hover { border-color: #FF0000; box-shadow: 0 14px 28px -4px rgba(255, 0, 0, 0.22); }
+    .social-card-telegram:hover { border-color: #229ED9; box-shadow: 0 14px 28px -4px rgba(34, 158, 217, 0.22); }
+    .social-card-viber:hover { border-color: #7360F2; box-shadow: 0 14px 28px -4px rgba(115, 96, 242, 0.22); }
+    
+    @keyframes marquee-up { 0% { transform: translateY(0%); } 100% { transform: translateY(-50%); } }
+    @keyframes marquee-down { 0% { transform: translateY(-50%); } 100% { transform: translateY(0%); } }
+    .animate-marquee-up { animation: marquee-up 26s linear infinite; }
+    .animate-marquee-down { animation: marquee-down 26s linear infinite; }
+    .animate-marquee-up:hover, .animate-marquee-down:hover { animation-play-state: paused; }
+
+    .leadership-slot { transition: all 450ms cubic-bezier(0.25, 1, 0.5, 1); }
+    .leadership-slot.slot-left { transform: scale(0.90) translateX(16px); opacity: 0.75; z-index: 10; cursor: pointer; }
+    .leadership-slot.slot-center { transform: scale(1.08) translateY(-6px); opacity: 1; z-index: 30; }
+    .leadership-slot.slot-right { transform: scale(0.90) translateX(-16px); opacity: 0.75; z-index: 10; cursor: pointer; }
+  </style>
+
+  <!-- React 18 & Router 6 Scripts (Exact CDN links specified) -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/history@5/umd/history.development.js"></script>
+  <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.development.js"></script>
+  <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body class="bg-[#F8FAFC] text-[#0F172A] font-sans antialiased selection:bg-[#DEB54A] selection:text-[#0B2240]">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const { createRoot } = ReactDOM;
+    const { MemoryRouter, Routes, Route, Link, useNavigate, useLocation } = ReactRouterDOM;
+
+    const MIT_CREST = "https://lh3.googleusercontent.com/aida-public/AB6AXuALTNvaVQVxEdO4teiRsBZhqjubeGzzEhVdk9M6NzfGzIHGbgulWp0j6RizSJXYg88MI4ZYn4GJBnM9NupPC7b2ztx_OK8FSbjY0d86RoSPjwndsBuwZlVIgG_IkAXONbgROyMElSu6qfvsoCyp3bu4RA1hrn1ytfk9Rf6LGgu282v_3lqB3f6hA5N7S9OXvjiRzu_1cMs6QdW1bguQ2HKP18r47D0CyPOEkIVdgi1awMn80AUQ-0HN7HH2SH4p2yOiig";
+
+    // -------------------------------------------------------------
+    // SHARED NAVIGATION & UTILITY BAR COMPONENT
+    // -------------------------------------------------------------
+    function NavigationBar() {
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false);
+      const location = useLocation();
+
+      const isActive = (path) => location.pathname === path;
+
+      return (
+        <header class="w-full relative z-50">
+          {/* Top Archival Utility Bar */}
+          <div class="h-[38px] bg-[#061528] border-b border-white/10 text-xs text-[#CBD5E1] flex items-center justify-between px-4 sm:px-8">
+            <div class="flex items-center space-x-2 truncate">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#13335D] text-[#DEB54A] font-medium border border-white/10 text-[11px] sm:text-xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#DEB54A] mr-1.5 animate-pulse"></span>
+                "Ye are the light of the world" (Matthew 5:14) • 1927–2027 CENTENNIAL
+              </span>
+            </div>
+            <div class="hidden sm:flex items-center space-x-4 md:space-x-5 text-[11px] sm:text-xs text-slate-300">
+              <a class="flex items-center space-x-1.5 hover:text-white transition-colors" href="tel:+951641388">
+                <span class="material-symbols-outlined text-[14px] text-[#DEB54A]">call</span>
+                <span>+95-1-641388</span>
+              </a>
+              <span class="text-white/20">|</span>
+              <a class="hidden md:flex items-center space-x-1.5 hover:text-white transition-colors" href="mailto:administration@mit.edu.mm">
+                <span class="material-symbols-outlined text-[14px] text-[#DEB54A]">mail</span>
+                <span>administration@mit.edu.mm</span>
+              </a>
+              <span class="text-white/20 hidden md:inline">|</span>
+              <Link to="/contact" class="inline-flex items-center text-sky-300 hover:text-white font-medium transition-colors bg-white/5 px-2 py-0.5 rounded-full border border-sky-400/40">
+                <span class="mr-1">🏛️</span>
+                <span>Archival Portal (1927–2025) ↗</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Main Navigation Bar */}
+          <nav class="h-20 bg-white sticky top-0 z-50 border-b border-slate-200/80 shadow-sm px-4 sm:px-8">
+            <div class="max-w-7xl mx-auto h-full flex items-center justify-between">
+              {/* Brand Logo & Lockup */}
+              <Link to="/" class="flex items-center space-x-3.5 group">
+                <div class="relative w-11 h-11 flex-shrink-0">
+                  <img alt="MIT Seal" class="w-11 h-11 rounded-full border border-[#C49A2C] shadow-sm object-cover bg-white" src={MIT_CREST} />
+                </div>
+                <div class="flex flex-col text-left">
+                  <span class="font-serif font-bold text-[18px] sm:text-[20px] text-[#0B2240] tracking-tight group-hover:text-blue-900 transition-colors leading-tight">
+                    Myanmar Institute of Theology
+                  </span>
+                  <div class="flex items-center space-x-2 text-[10px] font-bold text-[#C49A2C] tracking-widest uppercase mt-0.5">
+                    <span>LIBERAL ARTS PROGRAM (LAP) • Estd. 2000</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Desktop Nav Links */}
+              <div class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-700">
+                <Link to="/" class={`py-2 transition-colors ${isActive('/') ? 'text-[#0B2240] font-bold border-b-2 border-[#0B2240]' : 'hover:text-[#0B2240]'}`}>
+                  Home
+                </Link>
+
+                {/* Programs Dropdown */}
+                <div class="relative group" onMouseEnter={() => setProgramsDropdownOpen(true)} onMouseLeave={() => setProgramsDropdownOpen(false)}>
+                  <Link to="/programs" class={`flex items-center space-x-1 py-2 transition-colors ${isActive('/programs') ? 'text-[#0B2240] font-bold border-b-2 border-[#0B2240]' : 'hover:text-[#0B2240]'}`}>
+                    <span>LAP Programs</span>
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+                  </Link>
+                  {programsDropdownOpen && (
+                    <div class="absolute left-0 top-full w-64 bg-white rounded-lg shadow-xl border border-slate-100 py-2 text-slate-800 z-50 animate-fadeIn">
+                      <Link to="/programs" class="block px-4 py-2 hover:bg-[#F8FAFC] text-xs font-semibold text-[#0B2240]">Undergraduate BA/BSc (6 Majors)</Link>
+                      <Link to="/programs" class="block px-4 py-2 hover:bg-[#F8FAFC] text-xs font-semibold text-[#0B2240]">Graduate & Master's (7 Tracks)</Link>
+                      <Link to="/programs" class="block px-4 py-2 hover:bg-[#F8FAFC] text-xs font-semibold text-[#0B2240]">Executive HR Leadership Series</Link>
+                    </div>
+                  )}
+                </div>
+
+                <Link to="/about" class={`py-2 transition-colors ${isActive('/about') ? 'text-[#0B2240] font-bold border-b-2 border-[#0B2240]' : 'hover:text-[#0B2240]'}`}>
+                  About Us
+                </Link>
+
+                <Link to="/events" class={`py-2 transition-colors ${isActive('/events') ? 'text-[#0B2240] font-bold border-b-2 border-[#0B2240]' : 'hover:text-[#0B2240]'}`}>
+                  Events & Activities
+                </Link>
+
+                <Link to="/contact" class={`py-2 transition-colors ${isActive('/contact') ? 'text-[#0B2240] font-bold border-b-2 border-[#0B2240]' : 'hover:text-[#0B2240]'}`}>
+                  Contact Us
+                </Link>
+              </div>
+
+              {/* Action Buttons */}
+              <div class="flex items-center space-x-3">
+                <Link to="/contact" class="hidden sm:inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold text-slate-800 bg-white border border-slate-300 rounded-sm hover:bg-slate-50 transition-colors shadow-sm">
+                  Visit
+                </Link>
+                <Link to="/contact" class="inline-flex items-center px-5 py-2 text-xs sm:text-sm font-semibold text-white bg-[#0B2240] hover:bg-slate-900 rounded-sm shadow-sm transition-all">
+                  Apply
+                </Link>
+                <button aria-label="Toggle Navigation Menu" class="lg:hidden p-2 rounded-sm text-slate-700 hover:text-[#0B2240] hover:bg-slate-100" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                  <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Dropdown Drawer */}
+            {mobileMenuOpen && (
+              <div class="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 text-sm text-slate-700 space-y-2 shadow-inner">
+                <Link to="/" onClick={() => setMobileMenuOpen(false)} class="block py-2 px-3 rounded-sm hover:bg-slate-50 font-medium">Home</Link>
+                <Link to="/programs" onClick={() => setMobileMenuOpen(false)} class="block py-2 px-3 rounded-sm hover:bg-slate-50 font-medium">LAP Programs</Link>
+                <Link to="/about" onClick={() => setMobileMenuOpen(false)} class="block py-2 px-3 rounded-sm hover:bg-slate-50 font-medium">About Us</Link>
+                <Link to="/events" onClick={() => setMobileMenuOpen(false)} class="block py-2 px-3 rounded-sm hover:bg-slate-50 font-medium">Events & Activities</Link>
+                <Link to="/contact" onClick={() => setMobileMenuOpen(false)} class="block py-2 px-3 rounded-sm bg-slate-100 text-[#0B2240] font-bold border-l-4 border-[#0B2240]">Contact Us</Link>
+              </div>
+            )}
+          </nav>
+        </header>
+      );
+    }
+
+    // -------------------------------------------------------------
+    // SHARED INSTITUTIONAL MASTER FOOTER
+    // -------------------------------------------------------------
+    function Footer() {
+      return (
+        <footer class="bg-[#061528] text-slate-300 border-t border-white/10 pt-16 pb-12 font-sans text-xs" id="archival-portal">
+          <div class="max-w-7xl mx-auto px-4 md:px-8 space-y-12">
+            <div class="flex flex-col md:flex-row items-center justify-between pb-8 border-b border-white/10 gap-6">
+              <div class="flex items-center space-x-4">
+                <img alt="MIT Seal" class="w-14 h-14 rounded-full border-2 border-[#C49A2C] object-contain shadow-md bg-white p-0.5" src={MIT_CREST} />
+                <div>
+                  <h4 class="font-serif font-bold text-lg text-white">Myanmar Institute of Theology</h4>
+                  <p class="text-xs text-[#DEB54A]">Liberal Arts Program (LAP) • Estd. 2000</p>
+                  <p class="text-[11px] text-slate-400">Seminary Hill, Insein, Yangon, Myanmar</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-3 text-white">
+                <a class="w-10 h-10 rounded-full inline-flex items-center justify-center bg-[#1877F2] hover:opacity-90 shadow-md transition-all hover:scale-105" href="https://facebook.com" target="_blank" rel="noreferrer">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a class="w-10 h-10 rounded-full inline-flex items-center justify-center bg-[#FF0000] hover:opacity-90 shadow-md transition-all hover:scale-105" href="#youtube">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a class="w-10 h-10 rounded-full inline-flex items-center justify-center bg-[#229ED9] hover:opacity-90 shadow-md transition-all hover:scale-105" href="#telegram">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.832.942z"/></svg>
+                </a>
+                <a class="w-10 h-10 rounded-full inline-flex items-center justify-center bg-[#7360F2] hover:opacity-90 shadow-md transition-all hover:scale-105" href="#viber">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.12 3.63C16.92 1.94 13.79 1.5 8.94 2.03 4.29 2.54 1.76 5.25 1.3 9.77c-.36 3.51.57 6.64 2.45 8.95l.13.16-.4 3.75c-.06.53.4.95.89.82l4.13-1.09.28.14c1.15.58 2.45.89 3.86.89.28 0 .55-.01.83-.04 5.21-.49 8.24-3.4 8.78-8.45.54-5.06-1.14-9.35-3.14-11.27z"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
+              <div class="space-y-3">
+                <h5 class="font-sans font-bold text-white uppercase tracking-wider text-[11px]">Liberal Arts Program</h5>
+                <ul class="space-y-2">
+                  <li><Link to="/programs" class="hover:text-white transition-colors">BA/BSc (6 Majors, 123 Credits)</Link></li>
+                  <li><Link to="/programs" class="hover:text-white transition-colors">MBA & MM Master Programs</Link></li>
+                  <li><Link to="/programs" class="hover:text-white transition-colors">MACD (Community Development)</Link></li>
+                  <li><Link to="/programs" class="hover:text-white transition-colors">MAPS (Peace Studies)</Link></li>
+                  <li><Link to="/programs" class="hover:text-white transition-colors">MAID (Interfaith Dialogue)</Link></li>
+                  <li><Link to="/programs" class="text-[#DEB54A] hover:underline">Executive HR Leadership Series</Link></li>
+                </ul>
+              </div>
+
+              <div class="space-y-3">
+                <h5 class="font-sans font-bold text-white uppercase tracking-wider text-[11px]">Theology Program</h5>
+                <ul class="space-y-2">
+                  <li><span class="text-slate-400">Doctor of Philosophy (Ph.D.)</span></li>
+                  <li><span class="text-slate-400">Doctor of Ministry (D.Min.)</span></li>
+                  <li><span class="text-slate-400">Master of Theology (M.Th.)</span></li>
+                  <li><span class="text-slate-400">Master of Divinity (M.Div.)</span></li>
+                  <li><span class="text-slate-400">Master of Theological Studies</span></li>
+                  <li><span class="text-slate-400">MACS & MAIS Programs</span></li>
+                </ul>
+              </div>
+
+              <div class="space-y-3">
+                <h5 class="font-sans font-bold text-white uppercase tracking-wider text-[11px]">Admissions & Campus</h5>
+                <ul class="space-y-2">
+                  <li><Link to="/contact" class="text-sky-300 hover:underline">Application Forms (PDF)</Link></li>
+                  <li><Link to="/events" class="hover:text-white transition-colors">Exam Timetable 2026–2027</Link></li>
+                  <li><Link to="/programs" class="hover:text-white transition-colors">Tuition & Installment Schemes</Link></li>
+                  <li><Link to="/events" class="hover:text-white transition-colors">Faith & Hope Chapel Schedule</Link></li>
+                  <li><span class="text-slate-400">Seminary Library Catalog</span></li>
+                </ul>
+              </div>
+
+              <div class="space-y-3">
+                <h5 class="font-sans font-bold text-white uppercase tracking-wider text-[11px]">Centennial & Archival</h5>
+                <ul class="space-y-2">
+                  <li><Link to="/about" class="text-sky-300 hover:text-white transition-colors flex items-center"><span>Centennial History (1927–2027)</span> <span class="ml-1">↗</span></Link></li>
+                  <li><Link to="/about" class="hover:text-white transition-colors flex items-center"><span>ATESEA Accreditation Reports</span> <span class="ml-1">↗</span></Link></li>
+                  <li><span class="text-slate-400 flex items-center"><span>Seminary Library Portal</span></span></li>
+                  <li><span class="text-[#DEB54A] flex items-center"><span>Centennial Fund (2027)</span></span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-sm bg-[#0B2240] border border-white/10 text-center text-xs text-slate-300 font-mono flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              <span><strong>LAP Undergrad:</strong> +95 9 441 684 406</span>
+              <span class="hidden md:inline text-slate-600">|</span>
+              <span><strong>Grad Office:</strong> +95 9 961 409 339</span>
+              <span class="hidden md:inline text-slate-600">|</span>
+              <span><strong>Business Dept:</strong> lap.businessdept@gmail.com</span>
+            </div>
+
+            <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-3">
+              <p>© 1927–2027 Myanmar Institute of Theology. All Rights Reserved. A Century of Faith and Service.</p>
+              <div class="flex items-center space-x-4">
+                <span class="hover:text-white cursor-pointer">Privacy Policy</span>
+                <span class="hover:text-white cursor-pointer">Terms of Study</span>
+                <span class="hover:text-white cursor-pointer">Accessibility</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      );
+    }
+
+    // -------------------------------------------------------------
+    // SCREEN 1: HOME PAGE
+    // -------------------------------------------------------------
+    function HomePage() {
+      return (
+        <main class="w-full">
+          {/* Hero Section */}
+          <section class="relative w-full overflow-hidden">
+            <div class="relative w-full min-h-[819px] flex flex-col items-center justify-center text-center px-4 sm:px-6 py-20 md:py-28 bg-[#061528]">
+              <img alt="Myanmar Institute of Theology Campus" class="absolute inset-0 w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCghebrH7eW5tjNJlOSzAUik19mXhzVQNsMbkkJpLaSj7yaY3BWEQXhl1Li9KjJszPPixAiS1gluwfkMI3_DbRCjtx9R8vbjtsUnArqgtibaZAvJ4JhNjldQd4mrD1LimyjBt7CfOYtk5J_mWrKef3OLxgQkncmGxJd4G8-AP6n9YWaIfI8Ckkh8aDh3XHZ7SIXJUrpZnGB63v_9_oq8f-e5R7cWFlVTD-EtokNH_Ij5bh-Uz4JGZVq_pyhkZaIRy7HcYoR1VEWoBk8wg" />
+              <div class="absolute inset-0 bg-gradient-to-b from-[#061528]/60 via-[#0B2240]/75 to-[#061528]/90 z-10"></div>
+              <div class="relative z-20 max-w-4xl mx-auto flex flex-col items-center text-white px-2">
+                <span class="font-script text-[#DEB54A] text-2xl sm:text-3xl md:text-4xl drop-shadow mb-1">
+                  A Century of Faith & Scholarship
+                </span>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs sm:text-sm font-semibold tracking-widest uppercase text-slate-200 mb-4">
+                  <span class="w-2 h-2 rounded-full bg-[#DEB54A]"></span>
+                  <span>CENTENNIAL MILESTONE • 1927–2027</span>
+                </div>
+                <h1 class="font-serif font-bold text-4xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.15] drop-shadow-md mb-2">
+                  Myanmar Institute of Theology
+                </h1>
+                <span class="font-serif italic text-2xl sm:text-3xl text-[#DEB54A] font-normal mb-5 drop-shadow-sm">
+                  (MIT)
+                </span>
+                <p class="font-sans text-base sm:text-lg text-slate-100 max-w-2xl leading-relaxed mb-8 drop-shadow">
+                  A Century of Faith, Scholarship, and Service (1927–2027). Nurturing leaders and transforming society through holistic higher education and dynamic evening liberal arts study.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                  <Link to="/programs" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-sm bg-[#C49A2C] hover:bg-[#DEB54A] text-[#0B2240] font-sans font-bold text-sm sm:text-base shadow-lg transition">
+                    <span>Explore LAP Admissions 2026–2027</span>
+                    <span>→</span>
+                  </Link>
+                  <Link to="/about" class="inline-flex items-center px-7 py-3.5 rounded-sm backdrop-blur-sm bg-white/15 border border-white/50 text-white hover:bg-white hover:text-[#0B2240] font-sans font-semibold text-sm sm:text-base shadow transition">
+                    <span>About Institutional Legacy</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Centennial Feature & President's Spotlight */}
+          <section class="bg-white text-slate-800 py-16 sm:py-20 border-b border-slate-200/80">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                <div class="lg:col-span-5">
+                  <div class="relative rounded-sm border border-amber-200/60 shadow-lg overflow-hidden aspect-[4/5] bg-slate-100 group max-w-md mx-auto lg:max-w-none">
+                    <img alt="Dr. Naw Eh Tar Gay, President" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4MMGoixIiPN8zb_7dDx4-eGbAujDvGK4xZ5vL8Knk3gGEJYZW9R6muYo_8FRY0ctAg-VbaBSqp4Y5y3GOtSXXqjIUz-Vz13YUAhNmU29nShrqnHgmiQmUM9YjkmQBRdm5wV_ItpA8rc9MxxKjSH12cvdc0IPvHf68djzrnYA-bQDKCItM8dHOeSWqnaI8p9fRCHdpIEwZK36i0uTrMxTIDATIsLd44EGrRIm_aTJCijPGoYKrM6eFuGq9TVlBuCW_5OfDlK7Mo24jbQ" />
+                    <div class="absolute top-4 right-4 bg-[#0B2240]/90 backdrop-blur-md border border-[#DEB54A]/40 text-white rounded-full px-3 py-1 shadow-md">
+                      <span class="text-[10px] uppercase font-bold tracking-widest text-[#DEB54A]">1927 • 2027 CENTENNIAL</span>
+                    </div>
+                    <div class="absolute bottom-4 inset-x-4 bg-white/95 backdrop-blur-md border border-slate-200/80 rounded-sm p-4 shadow-lg text-slate-900">
+                      <h4 class="text-[#0B2240] font-bold text-lg font-serif">Dr. Naw Eh Tar Gay</h4>
+                      <p class="text-xs text-slate-600 font-sans font-medium mt-0.5">President & Centennial Committee Chairperson</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="lg:col-span-7 flex flex-col justify-center">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-amber-100/80 text-amber-900 border border-amber-200/80 mb-3 w-fit">
+                    <span>✨</span>
+                    <span>CENTENNIAL CELEBRATION SPOTLIGHT (1927–2027)</span>
+                  </div>
+                  <h2 class="font-serif text-3xl lg:text-4xl font-bold text-[#0B2240] leading-tight mb-4">
+                    “Arise, Shine Our Light in the Darkness”
+                  </h2>
+                  <blockquote class="text-base lg:text-lg text-slate-700 font-serif italic leading-relaxed pl-4 border-l-2 border-amber-400 mb-6">
+                    “Since its founding in 1927, Myanmar Institute of Theology has stood as a beacon of faith, scholarship, and service. As we approach our 100th year anniversary in 2027, we stand at the threshold of a historic milestone to give thanks for God’s enduring faithfulness and renew our shared vision for the next century of ministry and academic excellence.”
+                  </blockquote>
+                  <div class="bg-amber-50/70 border border-amber-200/80 rounded-sm p-5 mb-6">
+                    <h4 class="font-bold text-slate-900 text-sm md:text-base flex items-center gap-2">
+                      <span>✨</span> ၃ မှ ၃,၀၀၀ သို့ — MIT ရဲ့ ရာစုနှစ်တစ်ခုစာ ပညာရေးခရီးစဉ်
+                    </h4>
+                    <p class="mt-2 text-xs md:text-sm text-slate-700 leading-loose font-myanmar">
+                      နှစ် ၁၀၀ ဆိုတဲ့ သမိုင်းစာမျက်နှာများဟာ MIT ကျောင်းတော်ကြီးသည် ကျောင်းသား ၃ ဦးဖြင့် စတင်တည်ထောင်ခဲ့ရာမှ ကျောင်းသား ၃,၀၀၀ ခန့်အထိ တိုးတက်လာခဲ့မှုအတွက် ကောင်းချီးနှင့် ကျေးဇူးတော်ဖြစ်သလို ပညာရေးအခွင့်အလမ်းများကို ဆက်လက်ဖန်တီးပေးလျက်ရှိပါသည်။
+                    </p>
+                  </div>
+                  <div>
+                    <Link to="/about" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-sm bg-[#0B2240] hover:bg-[#13335D] text-white text-sm font-semibold transition shadow-sm">
+                      <span>Read Full Centennial Greeting & Projects →</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Legacy in Numbers */}
+          <section class="py-16 bg-[#FDFBF7] border-b border-[#F1EAD9]/60">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-sans font-bold uppercase tracking-[0.15em] text-[#96721C] block mb-1">Century of Faith & Scholarship</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-[#0B2240] tracking-tight">A Legacy in Numbers</h2>
+              </div>
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="flex flex-col items-center p-4 bg-white border border-slate-200 rounded-sm shadow-sm">
+                  <span class="font-serif text-4xl md:text-5xl font-bold text-[#0B2240] leading-none mb-2">1927</span>
+                  <h3 class="font-sans font-bold text-[#0B2240] text-xs uppercase tracking-wider mb-1">Founding Year</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Seminary Hill heritage in theological formation.</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white border border-slate-200 rounded-sm shadow-sm">
+                  <span class="font-serif text-4xl md:text-5xl font-bold text-[#96721C] leading-none mb-2">100 Yrs</span>
+                  <h3 class="font-sans font-bold text-[#0B2240] text-xs uppercase tracking-wider mb-1">Centennial Milestone</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">1927–2027 • Faith & Scholarship.</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white border border-slate-200 rounded-sm shadow-sm">
+                  <span class="font-serif text-4xl md:text-5xl font-bold text-[#0B2240] leading-none mb-2">7,000+</span>
+                  <h3 class="font-sans font-bold text-[#0B2240] text-xs uppercase tracking-wider mb-1">Alumni Network</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Ministers, civic developers, and global executives.</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-white border border-slate-200 rounded-sm shadow-sm">
+                  <span class="font-serif text-4xl md:text-5xl font-bold text-[#0B2240] leading-none mb-2">13+</span>
+                  <h3 class="font-sans font-bold text-[#0B2240] text-xs uppercase tracking-wider mb-1">Academic Pathways</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Undergraduate evening majors, Master's cohorts & certificates.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Academic Divisions Portals */}
+          <section class="bg-[#F8FAFC] py-20">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="text-center max-w-3xl mx-auto mb-14 space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-[#B45309] font-sans">INSTITUTIONAL PATHWAYS</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-4xl text-[#0B2240] tracking-tight">Academic Divisions</h2>
+                <p class="font-sans text-slate-600 text-sm sm:text-base">
+                  Rigorous Christian Scholarship & Transformative Liberal Arts on Seminary Hill
+                </p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8">
+                {/* Portal 1 */}
+                <div class="flex flex-col group bg-white rounded-sm border border-slate-200 shadow-sm overflow-hidden">
+                  <div class="relative h-[220px] w-full overflow-hidden">
+                    <img alt="Technology Lab at MIT" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFgAlmxsAOOH9Yz5QaijJ_6c_6nBJM0Q4wfqtd2e4AYWl6LJ3sASlKgG72UswgDn98m7YPc_YYoCoZ-stH9cbi3are8oBEgquz4ngwHBdJQ3wvWYBPKkdF_lIxzHfpR7GtDEiXD_mursXXdFFY3oNncYLTkmnMZbkrbDF4Uau087dCgM-MKqJI22QfAyER7l9NBopDAa-q1aZdQCfcWSi7G2UHrYk4pTsm3l8lZnBvwt-L4hudeHDezTnLTPfBSseJk6bBsHwZh9x_1w" />
+                    <span class="absolute top-4 left-4 bg-[#C49A2C] text-[#0B2240] font-bold text-xs px-3 py-1 rounded-sm shadow-sm">
+                      Silver Jubilee (2000–2025/2026)
+                    </span>
+                  </div>
+                  <div class="p-8 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                      <h3 class="font-serif text-2xl font-bold text-[#0B2240] mb-2">Liberal Arts Program (LAP)</h3>
+                      <span class="bg-blue-50 text-blue-900 border border-blue-100 text-xs font-medium px-3 py-1 rounded-full inline-flex items-center gap-2 mb-3">
+                        <span class="material-symbols-outlined text-[14px] text-blue-600">schedule</span>
+                        Evening Classes: 5:00 PM – 8:00 PM (Monday–Friday)
+                      </span>
+                      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Comprehensive BA/BSc degrees across 6 majors, 7 graduate Master’s programs, and professional Executive HR leadership series designed for aspiring leaders.
+                      </p>
+                      <div class="flex flex-wrap gap-1.5">
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Business Mgmt</span>
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Computer Science</span>
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">English</span>
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Music</span>
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Religion</span>
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Social Sciences</span>
+                      </div>
+                    </div>
+                    <div class="pt-4">
+                      <Link to="/programs" class="bg-[#0B2240] hover:bg-[#13335D] text-white py-3 rounded-sm font-semibold text-center block transition text-sm">
+                        Explore LAP Programs →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Portal 2 */}
+                <div class="flex flex-col group bg-white rounded-sm border border-slate-200 shadow-sm overflow-hidden">
+                  <div class="relative h-[220px] w-full overflow-hidden">
+                    <img alt="Seminary campus heritage" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ6ljlSsnySbqfXcEUkbqSEnBC2uod7c9MDtZkQ5a4TJ5vncRFokXpzLPWy-cPrvChmTFZ-4ppghhLCNwejdls6JCcoMQZ3ecEBSb9r-DoIhVhwgC2XtHyBYf0r2b1ezH8L08Cl3b8Usm-8SQNAM4RAubvXrkQDT5UzBr6IQ13tZLxA7DXrXExnySXhQxLZ1TdEvE3XdBg4wZAKBGAWL_0wL017L3Ld2Z5mpQ04oqEKMGQUSw3jy2a-_AY-MpcG022n1Jv_9l-X3KJBA" />
+                    <span class="absolute top-4 left-4 bg-[#0B2240] text-white font-bold text-xs px-3 py-1 rounded-sm border border-white/20 shadow-sm">
+                      Foundational Heritage (Estd. 1927)
+                    </span>
+                  </div>
+                  <div class="p-8 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                      <h3 class="font-serif text-2xl font-bold text-[#0B2240] mb-2">Theology Program</h3>
+                      <span class="bg-emerald-50 text-emerald-900 border border-emerald-100 text-xs font-medium px-3 py-1 rounded-full inline-flex items-center gap-2 mb-3">
+                        <span class="material-symbols-outlined text-[14px] text-emerald-600">church</span>
+                        Full-time Residential & Ministerial Formation
+                      </span>
+                      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Myanmar’s premier theological institute preparing pastors, biblical scholars, and servant leaders across the Baptist and ecumenical traditions.
+                      </p>
+                      <div class="flex flex-wrap gap-1.5">
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Pastoral Ministry</span>
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Theological Research</span>
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Ecumenical Formation</span>
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-sm">Contextual Ethics</span>
+                      </div>
+                    </div>
+                    <div class="pt-4">
+                      <Link to="/contact" class="border-2 border-[#0B2240] text-[#0B2240] hover:bg-[#0B2240] hover:text-white py-3 rounded-sm font-semibold text-center block transition text-sm">
+                        Inquire Theology Admissions ↗
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Admissions Open Banner */}
+          <section class="max-w-7xl mx-auto px-6 my-16">
+            <div class="bg-[#FDFBF7] border-2 border-[#C49A2C]/60 rounded-sm p-8 lg:p-10 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+              <div class="flex flex-col sm:flex-row items-start gap-6 flex-grow">
+                <div class="w-14 h-14 bg-[#C49A2C] rounded-sm flex items-center justify-center flex-shrink-0 text-white shadow-sm">
+                  <span class="material-symbols-outlined text-3xl">school</span>
+                </div>
+                <div class="space-y-1.5">
+                  <span class="text-[11px] uppercase tracking-widest font-bold text-[#B45309] block">● OPEN ENROLLMENT NOTICE • AY 2026–2027</span>
+                  <h3 class="font-serif font-bold text-2xl md:text-3xl text-[#0B2240] leading-snug">Admissions for Academic Year 2026–2027 are Open!</h3>
+                  <div class="flex flex-wrap items-center gap-2.5 pt-0.5">
+                    <span class="text-xs sm:text-sm text-[#0B2240] font-semibold bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-sm">📅 Prep courses: <strong>August 2026</strong></span>
+                    <span class="text-xs sm:text-sm text-[#0B2240] font-semibold bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-sm">✍️ Entrance Exam: <strong>September 19, 2026</strong></span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl mt-2">
+                    Official admissions dossiers, course syllabi, and application packets are now available. Early submissions are encouraged.
+                  </p>
+                </div>
+              </div>
+              <div class="flex flex-col items-center lg:items-end justify-center flex-shrink-0">
+                <Link to="/contact" class="w-full sm:w-auto bg-[#0B2240] hover:bg-[#13335D] text-white font-semibold text-sm px-7 py-3.5 rounded-sm shadow-md transition flex items-center justify-center gap-2">
+                  <span class="material-symbols-outlined text-lg">download</span>
+                  <span>Download Application Package (PDF)</span>
+                </Link>
+                <Link to="/programs" class="text-xs font-semibold text-slate-600 hover:text-[#0B2240] transition mt-2">View Admissions Timetable ↗</Link>
+              </div>
+            </div>
+          </section>
+        </main>
+      );
+    }
+
+    // -------------------------------------------------------------
+    // SCREEN 2: ACADEMIC PROGRAMS (LAP)
+    // -------------------------------------------------------------
+    function ProgramsPage() {
+      return (
+        <main class="w-full">
+          {/* Hero Banner */}
+          <section class="bg-white border-b border-slate-200/80 py-14 lg:py-16">
+            <div class="max-w-6xl mx-auto px-6 lg:px-8 text-left">
+              <span class="font-sans text-xs font-bold uppercase tracking-[0.14em] text-[#96721C] mb-2 block">
+                SILVER JUBILEE (2000–2025/26) • LIBERAL ARTS PROGRAM
+              </span>
+              <h1 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-[#0B2240] tracking-tight leading-[1.18] mb-4">
+                Comprehensive Higher Education for Leadership & Service
+              </h1>
+              <p class="font-sans text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mb-6">
+                Providing flexible evening undergraduate (BA/BSc), graduate (MA/MBA), and executive programs tailored for working professionals, aspiring scholars, and lifelong learners.
+              </p>
+              <div class="flex flex-wrap items-center gap-2.5 mb-8">
+                <div class="bg-white border border-slate-200 shadow-sm text-xs font-sans font-medium text-slate-700 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span>🎓</span><span>123 Total Undergrad Credits</span>
+                </div>
+                <div class="bg-white border border-slate-200 shadow-sm text-xs font-sans font-medium text-slate-700 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span>📚</span><span>6 BA/BSc Degree Majors</span>
+                </div>
+                <div class="bg-white border border-slate-200 shadow-sm text-xs font-sans font-medium text-slate-700 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span>🏛️</span><span>7 Graduate Master’s Degrees</span>
+                </div>
+                <div class="bg-white border border-slate-200 shadow-sm text-xs font-sans font-medium text-slate-700 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span>⏰</span><span>Evening 5:00 PM – 8:00 PM Sessions</span>
+                </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-4">
+                <Link to="/contact" class="bg-[#0B2240] hover:bg-[#07172b] text-white h-11 px-6 rounded-sm text-xs font-semibold inline-flex items-center gap-2 transition shadow-sm">
+                  <span class="material-symbols-outlined text-[16px]">download</span>
+                  <span>Download Application Form (PDF)</span>
+                </Link>
+                <a href="#timetable" class="border border-[#CBD5E1] text-[#0B2240] hover:bg-slate-50 h-11 px-5 rounded-sm text-xs font-semibold inline-flex items-center gap-2 transition">
+                  <span class="material-symbols-outlined text-[16px] text-amber-600">calendar_month</span>
+                  <span>View Admissions Schedule 2026–2027</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* 6 Majors Grid */}
+          <section class="py-16 sm:py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+            <div class="mb-12 text-center mx-auto max-w-3xl">
+              <span class="inline-flex items-center justify-center px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-amber-100 text-amber-800 border border-amber-300 mb-3">
+                Liberal Arts Program (LAP) • Undergraduate Studies
+              </span>
+              <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-[#0B2240] tracking-tight mb-3">
+                6 Major Degree Concentrations
+              </h2>
+              <p class="mt-3 text-base md:text-lg leading-relaxed text-slate-600">
+                Rigorous four-year Bachelor's curricula combining classical academic inquiry with contemporary professional application.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {/* Major 1 */}
+              <div class="bg-white rounded-sm border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group">
+                <div class="relative h-44 overflow-hidden bg-[#0B2240]">
+                  <img alt="Business Management" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeyCI6aK4RwCMStimS_WJufbWomBJ1yg_XYxG2R4zu9zWgaDapHV9NoD8-UB9cHwPU5ItSXaqafK8Wqm9LwxeugzPCNuQflCt4GVx5-MFN0qS_cDaZdgyZc75XfHgTvab6M7jihesg51evdxskpFeM9Va9AypeNJyiN-NscNG0MG7hHBInFx2pjLX9TerhI7NcusWPKKXRsSOg4Hqx8yLM_Ebk4z_vRKa1LlKvgAIOEZL03Hen2Y7jNGQCcaUiGKPNV6TQteWdvmTb7Q" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 class="font-serif text-xl font-bold text-[#0B2240] mb-2">Business Management</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">Enterprise governance, marketing strategy, accounting principles, and ethical leadership in competitive regional markets.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Enterprise Strategy</span>
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Finance & HR</span>
+                      <span class="text-[11px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-sm font-semibold">123 Credits</span>
+                    </div>
+                  </div>
+                  <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span class="text-slate-500 font-medium">Evening 5:00–8:00 PM</span>
+                    <Link to="/contact" class="text-blue-700 font-semibold hover:underline">Inquire Syllabus →</Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Major 2 */}
+              <div class="bg-white rounded-sm border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group">
+                <div class="relative h-44 overflow-hidden bg-[#0B2240]">
+                  <img alt="Computer Sciences" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ3IrjgYHkjtq3PWU-YylPxTeeRPjPMEyMV4_GPNw9OncgbBDQ63nigbtzOrj3_yGQ8tee6w0v5cJ8f2WFg6P0uQdYq0-88cN3aTPjQcU-ztUpAWaq_hfNt1C8mM4iT6ERgO1lmywgeJI2iEs2sQytAhFiyt6-a7eLD4LZtHeezKQFyAcnayu-ktcNnuVRlmmpudGdGFOoWE9srbIdKqtIjJ0TC8jmbJclZJB9GQ7sg0m65Uhiu9IDJJrfCMZaGW23u4wqPwNn2kT8pw" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 class="font-serif text-xl font-bold text-[#0B2240] mb-2">Computer Sciences</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">Software engineering fundamentals, web architectures, database design, networking, and applied tech solutions for Myanmar.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Software Eng.</span>
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Data Systems</span>
+                      <span class="text-[11px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-sm font-semibold">123 Credits</span>
+                    </div>
+                  </div>
+                  <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span class="text-slate-500 font-medium">Evening 5:00–8:00 PM</span>
+                    <Link to="/contact" class="text-blue-700 font-semibold hover:underline">Inquire Syllabus →</Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Major 3 */}
+              <div class="bg-white rounded-sm border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group">
+                <div class="relative h-44 overflow-hidden bg-[#0B2240]">
+                  <img alt="English Studies" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkx3wOQT3MPd69uvbz-Wb6TpsxYOhE2C6y_iALpaVP0O9UgxeYOb8_arCHFJ81jffpLHaZREssJspdVYJTtcsfTfVRNDicl--1x0VdzEC5OIW_CY4Q7en2bAxollURO_vK7Vdm9Nj98k89VnkeFuooSMNze-xGAsTpchHuxwzqTF-7vI3Ng4Xp265R6CK6HqOMJALfIyRqov44IejKX3LPmWYJm6j7E3YdtMcgU3nAfc541jsTuDuZIUlNyRwA0Z0jUzBIbE6dVS9DOg" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 class="font-serif text-xl font-bold text-[#0B2240] mb-2">English</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">World literature, applied linguistics, academic discourse, critical rhetoric, and bilingual translation techniques.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Linguistics</span>
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Translation</span>
+                      <span class="text-[11px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-sm font-semibold">123 Credits</span>
+                    </div>
+                  </div>
+                  <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span class="text-slate-500 font-medium">Evening 5:00–8:00 PM</span>
+                    <Link to="/contact" class="text-blue-700 font-semibold hover:underline">Inquire Syllabus →</Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Major 4 */}
+              <div class="bg-white rounded-sm border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group">
+                <div class="relative h-44 overflow-hidden bg-[#0B2240]">
+                  <img alt="Music Studies" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD71sb-nWKMmDxj-Dh2C7NrXEGZ90g6FIOLl2dlc-BuOXcew0nVb6irw6RhCgtWA6iJgSAXzNe6vwEbwGghrZzaFXgrMAt5cfkVyUKCt-7i1AVaHraMP1LthNGKMUUq0nHN2COVZq1nE_iqwsg-Qqty1KFTstGKTXUChIbRnDNOnSvRKhnWTw3tHeyMPTG-4m3Mxjx5VztJwn0n0gdws1pxfMNTBJWC0LymS22G2sHWtHXkz2g_1VP5RArN1qLq18NzednYA0Ca2SPjQ" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 class="font-serif text-xl font-bold text-[#0B2240] mb-2">Music</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">Choral conducting, musical theory, sacred hymnody, liturgical vocal training, and ensemble performance.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Choral Conducting</span>
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Sacred Liturgy</span>
+                      <span class="text-[11px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-sm font-semibold">123 Credits</span>
+                    </div>
+                  </div>
+                  <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span class="text-slate-500 font-medium">Evening 5:00–8:00 PM</span>
+                    <Link to="/contact" class="text-blue-700 font-semibold hover:underline">Inquire Syllabus →</Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Major 5 */}
+              <div class="bg-white rounded-sm border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group">
+                <div class="relative h-44 overflow-hidden bg-[#0B2240]">
+                  <img alt="Religion Studies" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsoatWdCMnBLEwJn7Acu7IHV1TwVMFSqSmzzZ12ENPDpe2OOtWMVLxirPg6V5OPnnIVfzYF4GaCZZI40G3MvUtMzDt8zRxeoet4goIioXjTwmsnE6HjZP_5-ZTHhf6O94S_R1HUKoy3nLyXkyik6NO3hDANNuwXz4XdkaSYnnQnRwhf3AuOdZi2pjENhI0c2DAtNNU1Hs4vkpPJ00ZByiDbQ1hYcM0mXxjZj4yvDkgpuH4iWpNCUlVoKjgqLS3lEIFomVjKaNJujBA0Q" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 class="font-serif text-xl font-bold text-[#0B2240] mb-2">Religion</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">World religions, Southeast Asian hermeneutics, Christian history, philosophical ethics, and harmonious dialogue.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Interfaith Dialogue</span>
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Ethics</span>
+                      <span class="text-[11px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-sm font-semibold">123 Credits</span>
+                    </div>
+                  </div>
+                  <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span class="text-slate-500 font-medium">Evening 5:00–8:00 PM</span>
+                    <Link to="/contact" class="text-blue-700 font-semibold hover:underline">Inquire Syllabus →</Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Major 6 */}
+              <div class="bg-white rounded-sm border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group">
+                <div class="relative h-44 overflow-hidden bg-[#0B2240]">
+                  <img alt="Social Sciences" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnc0XqtqxVKTv0-rtpT0Ceo1lj1MSVKR4pMskhtJSq8OLiPsgnqN_deeMx1bt7U0z0Z4Rloe1s1CO6BTtLiAWoe_cq1FYEcSkLhfh4L2fHBBYqNzhpjenC7YAigmkeE-z_GGMuqsv_8P8URrliuE9IxuPmop-OZMhUbTBiiMOE18UbOKTKdMvGImNWfsOr0aHiWOLsGlrnGv-d6J7A6QCfSawejjsoMdpvTNnoXxSOGYVDVn24FysawI0RP5JLkR6ISSekUeQb4YHIHQ" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 class="font-serif text-xl font-bold text-[#0B2240] mb-2">Social Sciences</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">Community mobilization, sociology of change, qualitative fieldwork methodology, and human rights advocacy.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Community Dev</span>
+                      <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-sm">Field Research</span>
+                      <span class="text-[11px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-sm font-semibold">123 Credits</span>
+                    </div>
+                  </div>
+                  <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span class="text-slate-500 font-medium">Evening 5:00–8:00 PM</span>
+                    <Link to="/contact" class="text-blue-700 font-semibold hover:underline">Inquire Syllabus →</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tuition Investment Banner */}
+            <div class="bg-amber-50 border-2 border-[#C49A2C] rounded-sm p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-sm bg-[#C49A2C] text-[#0B2240] flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <span class="material-symbols-outlined text-2xl text-white">payments</span>
+                </div>
+                <div>
+                  <div class="text-xs uppercase tracking-wider font-bold text-amber-800">Financial Investment & Value</div>
+                  <h4 class="font-serif text-xl sm:text-2xl font-bold text-[#0B2240]">Tuition & Fee Structure (2026–2027)</h4>
+                  <div class="text-[#0B2240] font-bold text-lg sm:text-xl mt-1">
+                    1,000,000 – 1,300,000 Kyats <span class="text-xs font-normal text-slate-700">per academic year</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
+                    Includes annual tuition, library research privileges, IT lab access, and student care. Installment payment schemes accommodated upon registration.
+                  </p>
+                </div>
+              </div>
+              <Link to="/contact" class="inline-flex items-center space-x-2 px-5 py-3 rounded-sm bg-[#0B2240] hover:bg-slate-900 text-white font-semibold text-xs sm:text-sm whitespace-nowrap shadow transition">
+                <span>Inquire Installment Plan →</span>
+              </Link>
+            </div>
+          </section>
+
+          {/* Timetable Schedule */}
+          <section class="py-16 bg-white border-t border-slate-200" id="timetable">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8">
+              <div class="mb-10 text-center max-w-3xl mx-auto">
+                <span class="inline-flex items-center px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-amber-100 text-amber-800 border border-amber-300 mb-2">
+                  Academic Year 2026–2027 Timetable
+                </span>
+                <h2 class="font-serif text-3xl font-bold text-[#0B2240]">Admissions & Examination Timetable</h2>
+              </div>
+              <div class="overflow-x-auto rounded-sm border border-slate-200 shadow-sm">
+                <table class="w-full text-left text-sm">
+                  <thead class="bg-[#0B2240] text-white text-xs uppercase tracking-wider font-semibold">
+                    <tr>
+                      <th class="py-3.5 px-6">Important Dates</th>
+                      <th class="py-3.5 px-6">Phase / Academic Activity</th>
+                      <th class="py-3.5 px-6">Target Cohorts</th>
+                      <th class="py-3.5 px-6">Venue / Modality</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200 text-slate-700">
+                    <tr class="hover:bg-slate-50 transition">
+                      <td class="py-3 px-6 font-bold text-[#0B2240]">15 May 2026</td>
+                      <td class="py-3 px-6 font-medium">Application Forms Open</td>
+                      <td class="py-3 px-6"><span class="px-2 py-0.5 rounded-sm bg-slate-100 text-xs font-semibold">BA, BSc & MA</span></td>
+                      <td class="py-3 px-6 text-xs text-slate-500">Online Download & Campus Office</td>
+                    </tr>
+                    <tr class="bg-amber-50/50 hover:bg-amber-50 transition">
+                      <td class="py-3 px-6 font-bold text-rose-700">31 July 2026</td>
+                      <td class="py-3 px-6 font-bold text-[#0B2240]">Application Forms Close (Strict Deadline)</td>
+                      <td class="py-3 px-6"><span class="px-2 py-0.5 rounded-sm bg-slate-100 text-xs font-semibold">BA, BSc & MA</span></td>
+                      <td class="py-3 px-6 text-xs text-slate-500">Admissions Registrar (5:00 PM Close)</td>
+                    </tr>
+                    <tr class="bg-amber-100/70 border-y-2 border-[#C49A2C] font-semibold">
+                      <td class="py-3.5 px-6 font-serif font-bold text-[#0B2240]">19 September 2026</td>
+                      <td class="py-3.5 px-6 font-serif font-bold text-[#0B2240]">★ MIT Entrance Examination</td>
+                      <td class="py-3.5 px-6"><span class="px-2 py-0.5 rounded-sm bg-white text-[#0B2240] border border-[#C49A2C] text-xs font-bold">BA, BSc & MA</span></td>
+                      <td class="py-3.5 px-6 text-xs font-medium text-[#0B2240]">Official Testing Centers (Yangon & Regions)</td>
+                    </tr>
+                    <tr class="bg-[#0B2240] text-white">
+                      <td class="py-3.5 px-6 text-[#DEB54A] font-bold">12 October 2026</td>
+                      <td class="py-3.5 px-6 font-bold">Opening Convocation & Semester Starts</td>
+                      <td class="py-3.5 px-6"><span class="px-2 py-0.5 rounded-sm bg-blue-900 text-xs text-white">All Enrolled</span></td>
+                      <td class="py-3.5 px-6 text-xs text-slate-300">Faith, Love & Hope Chapel</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </main>
+      );
+    }
+
+    // -------------------------------------------------------------
+    // SCREEN 3: ABOUT US
+    // -------------------------------------------------------------
+    function AboutPage() {
+      // 3-Card Interactive Swapper State
+      const facultyData = [
+        {
+          name: "Dr. Naw Eh Tar Gay",
+          role: "President",
+          badge: "Executive President",
+          desc: "Professor of New Testament Studies • Centennial Central Chair",
+          degree: "Ph.D • New Testament Studies",
+          img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAJtl5hQY9JOqsBQ29EP-ExFkRh_4i7j-nxZja62WYfNewO869THs48bmQRrjGDt65dMwd8Y__LiDP-B_KK0KcBhbbvTbcJPAwhmo_as8obv-b1O9PpaEIuh0k0dfAhIv6uSgn26WYeZnUH8XiDyH7A0xpCsK4dfQ4YqeXjAlhoggf6mpkZUGHwIhkFG8cKHRlBRYV2Z__uwOEJF-QyfaGtBXmmXR7TVeRisiG-7FRxLGsrcMeRNEalKMzaBdStcsvF4qhYemDg2vRFiA"
+        },
+        {
+          name: "Rev. Dr. Marip La Rip",
+          role: "Vice President",
+          badge: "Vice President",
+          desc: "Professor of Theology & Ethics • Institutional Operations",
+          degree: "Th.D • Systematic Theology & Ethics",
+          img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBUcGcArrGcdlRSIOB42YnBgLU0nf0HxeCenSwrsyHwKogQSIDmGWbgTW4IcbvgdKgq2d3EmU6p9Dl6HhbLAY9gQNgAxYbCOdz3bvTsHtEy93aXlbG1ZDLAdHOS8zvE5E8_ICivBj9daSSXfreS3al8HnHqU8KzymqPaqWW60rfgqSoxc8Y78B_aVFODFC0gYEaMoarlC3py7zMvo5WTuDQbwfv4SggdslYoayBosWJIWzdmazT6MxU"
+        },
+        {
+          name: "Rev. Dr. Saw Augurlion",
+          role: "Academic Dean",
+          badge: "Academic Dean",
+          desc: "Overseeing Curricula, Quality Assurance & Faculty Affairs",
+          degree: "D.Min • Pastoral & Academic Governance",
+          img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBX8yBFN_FqdkqJgkaboaJxqYRyGXNd_qUPLhva00zi0WomVSWO53MAJeg7cNOfk45shPn6kOtEw1MixHWPhrS4oe-pattK22M8GbLv4zPReuQFsDF5l9xbEHF1dKg-qZPsEfFfVWwUvbBtezlec8WvMEf8Xk_cu-p8MFUd-L7v46aX3FJe-pS3b3QPFQJSN10-z2t6ZCF_K3OBvzjJ_VNqh_--dWPh_kuPPH3Du2ySTXJzBCMC7CTO"
+        },
+        {
+          name: "Rev. Mang Tungg Thang",
+          role: "Dean of LAP",
+          badge: "Dean of LAP",
+          desc: "Liberal Arts Program Director • Evening Undergraduate Degrees",
+          degree: "M.Th • Liberal Arts Dean",
+          img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDcP8Vza6fj0CU2e23Zt_x6laDS2HNo4BYSgAGM_9eLeZAXVOTlDGH8SILaQdgkJ553On6zrsDy0AT1-95XY6gilR98Wl7N-cCSCMT_oXn8Ms7muklYvZwdJOJpdh5h1Q_p3ykTwDyid9fxj-wiq09qRyAmNiGnuSxveSTSsbg9VddoWb-75JIF2cvh-dUq3qQpmlVrFYuClj5hGSfJebBd6bgpFdm38QnDzjILnz17KT7RFvGjVjRm"
+        },
+        {
+          name: "Sayama May Zar Maw",
+          role: "Treasurer",
+          badge: "Treasurer",
+          desc: "Financial Stewardship, Scholarships & Campus Development",
+          degree: "MBA • Financial Stewardship",
+          img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAE8o_JBJZaAP_T6Rq2AHQy3vKZ7dzq74Kj2P1RXbtsofVZYHySnzmBU10LBwOrsKMFS0EjPfJ9aopBsh6DXetmH7yoF5YJHsuQTZrzqO0-sl3MzpMYVU07Lq3qPMDI8eHS3N_oqzSqi3r5FuhhIX9ABd7kGNKfua5GrKsZigMb5--bIM6dfNSC0OG2eZpBmnqHBRtEYOZhhH33gjjqml52yxf-7Ilo5Jmcd3DGwRXAjfnCgfq8jJsRVqQnRB0f7Ak283xJTwTzxX9QFg"
+        }
+      ];
+
+      const [centerIndex, setCenterIndex] = useState(0);
+      const total = facultyData.length;
+
+      const goPrev = () => setCenterIndex((centerIndex - 1 + total) % total);
+      const goNext = () => setCenterIndex((centerIndex + 1) % total);
+
+      const leftIdx = (centerIndex - 1 + total) % total;
+      const rightIdx = (centerIndex + 1) % total;
+
+      const leftData = facultyData[leftIdx];
+      const centerData = facultyData[centerIndex];
+      const rightData = facultyData[rightIdx];
+
+      return (
+        <main class="w-full">
+          {/* Header Banner */}
+          <section class="bg-white border-b border-slate-200/80 py-14 lg:py-16 text-[#0F172A]">
+            <div class="max-w-6xl mx-auto px-6 lg:px-8 text-left">
+              <span class="font-sans text-xs font-bold uppercase tracking-[0.14em] text-[#96721C] mb-2 block">
+                ESTABLISHED 1927 • INSEIN, YANGON | 100 YEARS OF ACADEMIC EXCELLENCE
+              </span>
+              <h1 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-[#0B2240] tracking-tight leading-[1.18] mb-4">
+                About Myanmar Institute of Theology <span class="font-sans font-semibold text-2xl lg:text-3xl text-[#96721C] ml-1">(MIT)</span>
+              </h1>
+              <p class="font-sans text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mb-7">
+                A beacon of faith, scholarship, and community service on Seminary Hill for nearly a century (1927–2027). Nurturing ethical leaders, advancing theological discovery, and pioneering holistic evening liberal arts education.
+              </p>
+              <div class="flex flex-wrap items-center gap-2.5">
+                <span class="bg-[#F8FAFC] border border-slate-200 text-xs font-medium text-slate-700 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span>🏛️</span> Seminary Hill Heritage (1927)
+                </span>
+                <span class="bg-[#F8FAFC] border border-slate-200 text-xs font-medium text-slate-700 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span>✨</span> Centennial Milestone (1927–2027)
+                </span>
+                <span class="bg-[#F8FAFC] border border-slate-200 text-xs font-medium text-slate-700 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span>🎖️</span> Silver Jubilee LAP (2000–2025/26)
+                </span>
+              </div>
+            </div>
+          </section>
+
+          {/* Mission, Vision, Motto Triptych */}
+          <section class="py-16 bg-[#F8FAFC]">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs uppercase tracking-widest font-bold text-[#C49A2C]">Guiding Institutional Foundations</span>
+                <h2 class="font-serif text-3xl lg:text-4xl font-bold text-[#0B2240] mt-2">Faith, Scholarship & Servant Leadership</h2>
+                <div class="w-16 h-1 bg-[#C49A2C] mx-auto mt-4 rounded-full"></div>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 items-stretch">
+                {/* Scriptural Anchor */}
+                <div class="bg-[#FAF7F2] border border-[#EAE3D2] rounded-sm p-8 flex flex-col justify-between shadow-sm">
+                  <div>
+                    <span class="bg-amber-100 text-amber-900 border border-amber-300 font-sans text-xs font-semibold px-3 py-1 rounded-full mb-3 inline-block">
+                      Scriptural Foundation
+                    </span>
+                    <blockquote class="font-serif italic text-2xl text-[#0B2240] leading-snug my-3 block">
+                      "Ye are the light of the world"
+                    </blockquote>
+                    <span class="font-sans text-xs font-bold tracking-widest text-[#0369A1] uppercase block mb-3">MATTHEW 5:14</span>
+                    <p class="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      Equipping students from diverse ethnic and cultural communities across Myanmar to reflect the light of Christ through academic inquiry, authentic integrity, and selfless servant leadership.
+                    </p>
+                  </div>
+                  <div class="text-xs font-semibold text-[#96721C] pt-6 border-t border-[#EAE3D2] mt-6">
+                    Seminary Hill Heritage • Estd. 1927
+                  </div>
+                </div>
+
+                {/* University Vision */}
+                <div class="bg-[#0B2240] border-[1.5px] border-[#C49A2C]/40 rounded-sm p-8 text-white flex flex-col justify-between shadow-lg">
+                  <div>
+                    <span class="bg-[#C49A2C]/20 text-[#DEB54A] border border-[#DEB54A]/40 text-xs font-semibold px-3 py-1 rounded-full mb-3 inline-block">
+                      Our Horizon
+                    </span>
+                    <h3 class="font-serif font-bold text-2xl text-white my-3">Leading Ecumenical & University Vision</h3>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed mt-2 mb-4">
+                      To be the premier ecumenical theological institution and emerge as a distinguished Christian university in Myanmar and Southeast Asia.
+                    </p>
+                    <div class="bg-white/10 p-3.5 rounded-sm border border-[#DEB54A]/30">
+                      <p class="font-myanmar text-xs text-slate-200 leading-relaxed">
+                        မြန်မာနိုင်ငံနှင့် အာရှတိုက်အတွင်း ထူးချွန်ထက်မြက်ပြီး ဘာသာပေါင်းစုံချစ်ကြည်ရေးနှင့် ခေတ်မီပညာရေးကို ဦးဆောင်သည့် ခရစ်ယာန်တက္ကသိုလ်အဖြစ် ရပ်တည်သွားရန်။
+                      </p>
+                    </div>
+                  </div>
+                  <div class="text-xs font-semibold text-[#DEB54A] pt-6 border-t border-white/10 mt-6">
+                    Transforming Society Through Higher Education
+                  </div>
+                </div>
+
+                {/* Mandate */}
+                <div class="bg-white border border-slate-200 rounded-sm p-8 flex flex-col justify-between shadow-sm">
+                  <div>
+                    <span class="bg-slate-100 text-[#0B2240] border border-slate-300 text-xs font-semibold px-3 py-1 rounded-full mb-3 inline-block">
+                      Three Core Pillars
+                    </span>
+                    <h3 class="font-serif font-bold text-2xl text-[#0B2240] my-3">Holistic Institutional Mission</h3>
+                    <ul class="space-y-3 mt-4 text-xs sm:text-sm text-slate-700">
+                      <li class="flex items-start space-x-2.5">
+                        <span class="w-5 h-5 rounded-full bg-amber-100 text-[#96721C] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                        <span><strong>Solid Foundation:</strong> In-depth study of the Word of God and classical texts.</span>
+                      </li>
+                      <li class="flex items-start space-x-2.5">
+                        <span class="w-5 h-5 rounded-full bg-amber-100 text-[#96721C] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                        <span><strong>Practical Training:</strong> Equipping for active ministry, enterprise governance, and civil leadership.</span>
+                      </li>
+                      <li class="flex items-start space-x-2.5">
+                        <span class="w-5 h-5 rounded-full bg-amber-100 text-[#96721C] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+                        <span><strong>Spiritual Formation:</strong> Nurturing resilient and ethical servant-leaders.</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="text-xs font-semibold text-[#0369A1] pt-6 border-t border-slate-100 mt-6">
+                    Church & Civil Society Readiness
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Interactive Leadership Swapper Section */}
+          <section class="py-16 bg-white border-t border-slate-200 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                  <span class="text-xs uppercase tracking-widest font-bold text-[#96721C] block mb-1">GOVERNANCE & STEWARDSHIP</span>
+                  <h2 class="font-serif text-3xl font-bold text-[#0B2240]">Executive Administration & Leadership</h2>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button onClick={goPrev} class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-[#0B2240] hover:text-white flex items-center justify-center transition shadow-sm text-[#0B2240]">
+                    <span class="material-symbols-outlined text-lg">chevron_left</span>
+                  </button>
+                  <button onClick={goNext} class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-[#0B2240] hover:text-white flex items-center justify-center transition shadow-sm text-[#0B2240]">
+                    <span class="material-symbols-outlined text-lg">chevron_right</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* 3-Card Stage */}
+              <div class="max-w-5xl mx-auto py-8 flex items-center justify-center min-h-[480px]">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center justify-center w-full">
+                  {/* Left Slot */}
+                  <div onClick={goPrev} class="leadership-slot slot-left bg-white rounded-sm border border-slate-200 p-5 shadow-md flex flex-col justify-end cursor-pointer">
+                    <img alt={leftData.name} class="w-full h-56 object-cover rounded-sm mb-3" src={leftData.img} />
+                    <span class="text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700 px-2 py-0.5 rounded-sm inline-block w-fit mb-1">{leftData.badge}</span>
+                    <h3 class="font-serif font-bold text-lg text-[#0B2240] leading-tight">{leftData.name}</h3>
+                    <p class="text-xs font-sans text-slate-600 line-clamp-2 mt-1">{leftData.desc}</p>
+                  </div>
+
+                  {/* Center Slot (Active Focus) */}
+                  <div class="leadership-slot slot-center bg-white rounded-sm border-2 border-[#DEB54A] shadow-xl p-6 flex flex-col justify-end">
+                    <img alt={centerData.name} class="w-full h-64 object-cover rounded-sm mb-4" src={centerData.img} />
+                    <span class="text-[11px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-sm inline-block w-fit mb-1">{centerData.badge}</span>
+                    <h3 class="font-serif font-bold text-xl text-[#0B2240] leading-tight">{centerData.name}</h3>
+                    <p class="text-xs font-sans text-slate-600 mt-1">{centerData.desc}</p>
+                    <div class="mt-2 pt-2 border-t border-slate-100 text-xs font-semibold text-[#96721C]">
+                      ★ {centerData.degree}
+                    </div>
+                  </div>
+
+                  {/* Right Slot */}
+                  <div onClick={goNext} class="leadership-slot slot-right bg-white rounded-sm border border-slate-200 p-5 shadow-md flex flex-col justify-end cursor-pointer">
+                    <img alt={rightData.name} class="w-full h-56 object-cover rounded-sm mb-3" src={rightData.img} />
+                    <span class="text-[10px] font-bold uppercase tracking-wider bg-sky-100 text-[#0369A1] px-2 py-0.5 rounded-sm inline-block w-fit mb-1">{rightData.badge}</span>
+                    <h3 class="font-serif font-bold text-lg text-[#0B2240] leading-tight">{rightData.name}</h3>
+                    <p class="text-xs font-sans text-slate-600 line-clamp-2 mt-1">{rightData.desc}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dot Indicators */}
+              <div class="flex items-center justify-center space-x-2 pt-2 pb-4">
+                {facultyData.map((_, idx) => (
+                  <button key={idx} onClick={() => setCenterIndex(idx)} class={`h-2.5 rounded-full transition-all ${idx === centerIndex ? 'w-7 bg-[#96721C]' : 'w-2.5 bg-slate-300'}`}></button>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Accreditation Panel */}
+          <section class="py-16 bg-[#F8FAFC] border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="bg-white rounded-sm border border-slate-200 p-8 shadow-sm">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                  <div class="lg:col-span-7">
+                    <span class="px-3 py-1 rounded-sm bg-[#0B2240] text-[#DEB54A] text-xs font-bold inline-block mb-2">ATESEA Accredited</span>
+                    <h3 class="font-serif text-2xl font-bold text-[#0B2240] mb-2">International Regional Accreditation</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                      Myanmar Institute of Theology is fully accredited by the Association for Theological Education in South East Asia (ATESEA). Commissions completed inspection visits in 2004, 2010, and 2015, endorsing academic integrity.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                      <span class="p-2 bg-slate-50 border border-slate-200 rounded-sm font-semibold text-[#0B2240]">Doctor of Ministry (D.Min)</span>
+                      <span class="p-2 bg-slate-50 border border-slate-200 rounded-sm font-semibold text-[#0B2240]">Master of Divinity (M.Div)</span>
+                      <span class="p-2 bg-slate-50 border border-slate-200 rounded-sm font-semibold text-[#0B2240]">Master of Theological Studies</span>
+                    </div>
+                  </div>
+                  <div class="lg:col-span-5 bg-slate-50 rounded-sm p-6 border border-slate-200 text-xs">
+                    <h4 class="font-bold text-[#C49A2C] uppercase tracking-wider mb-3">Historic US Partner Seminaries</h4>
+                    <p class="text-slate-700 font-semibold mb-1">Northern Baptist Theological Seminary (Chicago, IL)</p>
+                    <p class="text-slate-500 mb-3">Founding Academic Affiliation (1927)</p>
+                    <p class="text-slate-700 font-semibold mb-1">Central Baptist Theological Seminary (Kansas City, MO)</p>
+                    <p class="text-slate-500">Degree exchange & collaborative theology</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      );
+    }
+
+    // -------------------------------------------------------------
+    // SCREEN 4: EVENTS & ACTIVITIES
+    // -------------------------------------------------------------
+    function EventsPage() {
+      const [filterCategory, setFilterCategory] = useState('all');
+
+      const eventsList = [
+        {
+          id: 1,
+          category: 'wellness',
+          badge: '25th Jubilee Edition • Step Challenge',
+          title: 'MIT MOVE TOGETHER 2026 Challenge',
+          subtitle: 'COMMUNITY & WELLNESS • SPOTLIGHT INITIATIVE',
+          desc: 'A month-long physical fitness and fellowship initiative uniting undergraduate scholars, divinity students, faculty, and alumni. Participants track daily steps individually and across cohort circles.',
+          dates: '1 – 30 October 2026',
+          finale: '12 Dec 2026 • 07:00 – 09:00 AM',
+          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBAEbg1vqZfSwBQ2JnsD9Nusf3MVmOzk2Xfm1TqO9V5tHwpdiJLbTxM3PmaMhaxP6iPJU1Ll2nSJup-6sAGRXG9Csn4NvADjDBCs4MNfIBLQBm44co_UCiixp6jKwYf2CJkGkgPcx0RLEbYCdIvV9B3Q3rZd_hVo1aoxDZpjt44rKjqw2VjAwXhbwzqKiOe85qLtSpgge40uwGOEg_2M6dFcRMkGMTudLt_jWi0ymvO4aDSF59uuLQO0J8RRrmx_aS7L03qJlPbaCizqw'
+        },
+        {
+          id: 2,
+          category: 'institutional',
+          badge: 'Historic Seminary Hill (1927–2027)',
+          title: 'Countdown to Centennial Celebration 2027',
+          subtitle: 'HISTORIC HORIZONS • 100 YEARS',
+          motto: '“Arise, Shine Our Light in the Darkness” (Isaiah 60:1–3)',
+          desc: 'Celebrating a full century of faithful witness, indigenous theological scholarship, and holistic education in Myanmar since 1927. Coordinates heritage research and centennial publications.',
+          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCR6W9JnHregiTzcvCz_FyfXFbspRXgcVOyJ6vP0TlcLsoZfLnOpl0N6PRwC_9vLXm0mF4tthIDRshoKYngA3In6NjuT6Pyxm-hJZGOpSxsSHZrErnkFdSRniB75iScryYJ-efRilJ7WU2JD6oXdxbTE6BZAi3DBza-QyeNCBDAhecqjQ7Aya1bUZcbSCOo8Bw6vQMq9iIJITcbhuuBRBEbIrPlbnr0IO9XSWD89SOZMeCsiNrD04yHuzyzB2AwxKDcP64U1FWH1DbVpg'
+        },
+        {
+          id: 3,
+          category: 'institutional',
+          badge: 'Morning Chapel & Choral Convocation',
+          title: 'MIT Day 2026: “Rise and Act”',
+          subtitle: 'ANNUAL CAMPUS TRADITION • SEPTEMBER 20, 2026',
+          desc: 'An institution-wide celebration bringing together the Seminary and Liberal Arts faculties, students, and alumni. Highlights include thanksgiving services, choral anthems, and alumni reunions.',
+          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCKLeorehQUEPM_Nb0G7OrPTb23bfd0hDYU76QmzyRtNDP7HfiIrSMU3r3Ja-cE82aDi1aJ8A3z_6aezjZfF3fEWDwoy5uCGJAdmVliZVzQYvqaZs3YxgFgdglsF53y12XZMCBoPWPbw2JGk0HnVcZeca8iv9DxcVlDgMHKbqF6iA5IPZQL6Q1_KRMvgzQxWuxwSBjpjYtSgmAOmilmbVA4KBUM9IvhYnfNT9yzGDG9pCsdyh6_MT6X3vpvUsGKCobyJ3IdMdlGGY1C7Q'
+        },
+        {
+          id: 4,
+          category: 'academic',
+          badge: 'Theological Inquiry & Dialogue',
+          title: 'Contextual Theology Conference 2026',
+          subtitle: 'ANNUAL SCHOLARLY COLLOQUIUM • CTC',
+          desc: 'Investigating contextual biblical hermeneutics, interfaith dialogue, religious pluralism, and indigenous theological reflections in contemporary Myanmar under theme “Doing Theology Under the Bo Tree”.',
+          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDexx47CFLomFrj0PoIMm_-X-lVyxSKtBdl7HCSN1jNrxndMKlsgc2RSUiK-hJThGB5V3qdvkdvYYxWR6ljEvjyoPUmQ3p3udLqYxwb1av2_QJGUPreQzo7qj3Ns6ePa80mexy5av_7KFVwxoCgH1oRUyGmgrNjm2D265QHMfCCS6pQf0UHnbruWQkA-X3VOfTY63G3XfD0X7tqG0jueUOi1LjS6k97lwGuglgVo0VHlooti8Ttpnnm49RCs9zTZK6QAsTCBzB4XUyN0Q'
+        },
+        {
+          id: 5,
+          category: 'workshops',
+          badge: 'LAP Business Studies Dept. • Executive Cert',
+          title: 'Executive HR Leadership Series',
+          subtitle: 'PROFESSIONAL DEVELOPMENT • COHORT IV',
+          desc: 'Designed for working executives, NGO team leaders, and personnel managers seeking master-level competencies in organizational culture, diversity leadership, and strategic talent alignment.',
+          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDu6ufRufFnkqa-qAnI99WtLKyt1kRpCf0d4aSBhmdQe5X5hA5HzIT_UoFljY-9x5ZKOBBtx6s-6wI_LJbsKteWkQ9zbP5ceAvin7WMcgD2bpMWJVcIVi-e3_jnQfacwysGZycOVMv-NFbz4DGuJHDOuOM8jKUojSFr0m85jdZW7ZcdPhIXbcpFYrbgkps2D_JC-5kCD2OT7w7rWTq8tjjEh8tVOWL_0JMR6A9wAESCyYnvvji0XPUF9yBKPdBQmF-zCRlRd2fpWjXqzA'
+        }
+      ];
+
+      const filteredEvents = eventsList.filter(ev => filterCategory === 'all' || ev.category === filterCategory);
+
+      return (
+        <main class="w-full">
+          {/* Hero */}
+          <section class="bg-[#F8FAFC] border-b border-slate-200/80 pt-14 pb-8 px-4 sm:px-8">
+            <div class="max-w-7xl mx-auto px-6 space-y-3">
+              <p class="text-xs font-semibold uppercase tracking-widest text-[#96721C]">
+                CAMPUS LIFE & ACADEMIC GATHERINGS • SEMINARY HILL, INSEIN
+              </p>
+              <h1 class="font-serif text-3xl sm:text-4xl lg:text-[44px] leading-tight font-bold text-[#0F172A]">
+                Fostering Community, Spiritual Formation, and Academic Engagement
+              </h1>
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-3xl">
+                At Myanmar Institute of Theology (MIT), campus life extends far beyond the lecture hall. Discover our academic colloquia, spiritual celebrations, health initiatives, and executive development workshops.
+              </p>
+            </div>
+          </section>
+
+          {/* Filter Bar */}
+          <section class="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-8 py-3">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 overflow-x-auto custom-scrollbar">
+              <div class="flex items-center gap-2 min-w-max">
+                {[
+                  { id: 'all', label: 'All Events (5)' },
+                  { id: 'academic', label: 'Academic & Conferences' },
+                  { id: 'institutional', label: 'Institutional Celebrations' },
+                  { id: 'wellness', label: 'Community & Wellness' },
+                  { id: 'workshops', label: 'Workshops & Seminars' }
+                ].map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setFilterCategory(tab.id)}
+                    class={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition ${filterCategory === tab.id ? 'bg-[#0F294A] text-white shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+              <Link to="/contact" class="hidden lg:inline-flex items-center gap-1.5 text-xs font-semibold text-[#0F294A] hover:text-[#C58A2C] transition min-w-max">
+                <span class="material-symbols-outlined text-sm">add_circle</span>
+                <span>Submit Campus Event</span>
+              </Link>
+            </div>
+          </section>
+
+          {/* Events Zig-Zag List */}
+          <div class="max-w-7xl mx-auto px-4 sm:px-8 py-16 space-y-20">
+            {filteredEvents.map((item, index) => {
+              const isEven = index % 2 === 1;
+              return (
+                <article key={item.id} class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                  <div class={`lg:col-span-6 ${isEven ? 'order-1 lg:order-2' : ''}`}>
+                    <div class="relative overflow-hidden rounded-sm shadow-md border border-slate-200 aspect-[16/11]">
+                      <img alt={item.title} class="w-full h-full object-cover" src={item.img} />
+                      <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur text-[#0F294A] px-3 py-1 rounded-sm shadow text-xs font-semibold">
+                        {item.badge}
+                      </div>
+                    </div>
+                  </div>
+                  <div class={`lg:col-span-6 space-y-3.5 ${isEven ? 'order-2 lg:order-1' : ''}`}>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#C58A2C]">{item.subtitle}</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#0F294A] leading-snug">{item.title}</h2>
+                    {item.motto && <p class="font-serif italic text-sm text-[#C58A2C] font-semibold">{item.motto}</p>}
+                    <div class="w-16 h-1 bg-[#C58A2C] rounded-full"></div>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                    {item.dates && (
+                      <div class="bg-slate-50 border border-slate-200 p-3 rounded-sm text-xs text-slate-700">
+                        <span class="font-semibold block text-slate-900">Period: {item.dates}</span>
+                        <span>{item.finale}</span>
+                      </div>
+                    )}
+                    <div class="pt-2">
+                      <Link to="/contact" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-sm bg-[#0F294A] hover:bg-[#0C1D36] text-white text-xs sm:text-sm font-semibold shadow-sm transition">
+                        <span>Event Registration / Inquiries →</span>
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {/* Spiritual Formation Section */}
+          <section class="py-16 px-4 sm:px-8 bg-[#0B2240] text-white">
+            <div class="max-w-7xl mx-auto text-center mb-10">
+              <span class="text-xs font-bold uppercase tracking-widest text-[#DEB54A]">Communal Worship</span>
+              <h2 class="font-serif text-3xl font-bold mt-1">Spiritual Formation on Seminary Hill</h2>
+              <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-xl mx-auto">Grounded in the faith traditions of our founders, communal worship remains the bedrock of campus life.</p>
+            </div>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-white/10 p-6 rounded-sm border border-white/20">
+                <span class="material-symbols-outlined text-3xl text-amber-400 mb-2">wb_twilight</span>
+                <h3 class="font-serif font-bold text-lg mb-1">Morning Chapel</h3>
+                <p class="text-[#DEB54A] text-xs font-semibold mb-2">Mon–Fri • 10:00–10:30 AM</p>
+                <p class="text-xs text-slate-200">Daily scripture reflections, student choral anthems, and faculty messages in Faith, Love & Hope Chapel.</p>
+              </div>
+              <div class="bg-white/10 p-6 rounded-sm border border-white/20">
+                <span class="material-symbols-outlined text-3xl text-sky-400 mb-2">diversity_3</span>
+                <h3 class="font-serif font-bold text-lg mb-1">Community Prayer</h3>
+                <p class="text-[#DEB54A] text-xs font-semibold mb-2">Every Monday • 7:00–8:00 AM</p>
+                <p class="text-xs text-slate-200">Intercessory prayer assemblies dedicated to global peace, church ministries, and national reconciliation.</p>
+              </div>
+              <div class="bg-white/10 p-6 rounded-sm border border-white/20">
+                <span class="material-symbols-outlined text-3xl text-purple-400 mb-2">nights_stay</span>
+                <h3 class="font-serif font-bold text-lg mb-1">Weekly Vesper Service</h3>
+                <p class="text-[#DEB54A] text-xs font-semibold mb-2">Every Thursday • 5:00 PM</p>
+                <p class="text-xs text-slate-200">Quiet evening liturgical devotion with communion, candle lighting, and contemplative reflection.</p>
+              </div>
+            </div>
+          </section>
+        </main>
+      );
+    }
+
+    // -------------------------------------------------------------
+    // SCREEN 5: CONTACT & ADMISSIONS DIRECTORY
+    // -------------------------------------------------------------
+    function ContactPage() {
+      const [formSubmitted, setFormSubmitted] = useState(false);
+      const [copiedAddress, setCopiedAddress] = useState(false);
+
+      const handleCopy = () => {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText('Myanmar Institute of Theology (MIT), Seminary Hill, Insein Township 11011, Yangon, Myanmar');
+          setCopiedAddress(true);
+          setTimeout(() => setCopiedAddress(false), 2000);
+        }
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormSubmitted(true);
+      };
+
+      return (
+        <main class="w-full">
+          {/* Admissions Hero Hub */}
+          <section class="bg-[#F8FAFC] border-b border-slate-200 py-10 px-6 md:px-10">
+            <div class="max-w-7xl mx-auto">
+              <span class="text-xs font-bold uppercase tracking-widest text-[#B45309] block mb-2">
+                CAMPUS DIRECTORY & ADMISSIONS INQUIRIES • SEMINARY HILL, INSEIN
+              </span>
+              <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B2240] tracking-tight mb-2">
+                Get in Touch with Myanmar Institute of Theology
+              </h1>
+              <p class="text-slate-600 text-sm md:text-base max-w-3xl leading-relaxed mb-4">
+                Have questions about LAP admissions, academic programs, entrance exams, or campus life? Connect directly with our departmental deans and administrative offices.
+              </p>
+              <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="bg-white border border-slate-200 text-slate-700 rounded-full px-3.5 py-1 text-xs font-semibold shadow-sm">🏛️ Goodenough Hall & Admin Wing</span>
+                <span class="bg-white border border-slate-200 text-slate-700 rounded-full px-3.5 py-1 text-xs font-semibold shadow-sm">⏰ Walk-in Hours: Tuesdays 10 AM–5 PM</span>
+                <span class="bg-white border border-slate-200 text-slate-700 rounded-full px-3.5 py-1 text-xs font-semibold shadow-sm">📞 Admissions Hotline: +95 9 441 684 406</span>
+              </div>
+              <div class="bg-slate-100/90 rounded-sm p-3 max-w-3xl shadow-sm">
+                <p class="text-slate-700 text-xs sm:text-sm leading-relaxed font-myanmar">
+                  “မြန်မာနိုင်ငံဓမ္မတက္ကသိုလ် ဝိဇ္ဇာသိပ္ပံပညာဌာန (LAP) ကျောင်းဝင်ခွင့်၊ သင်ရိုးညွှန်းတမ်းများနှင့် အထွေထွေစုံစမ်းမေးမြန်းမှုများအတွက် တိုက်ရိုက်ဆက်သွယ်နိုင်ပါသည်။”
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Departmental Directory 4 Cards */}
+          <section class="max-w-7xl mx-auto px-4 sm:px-8 py-16">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 border-b border-slate-200 pb-4">
+              <div>
+                <span class="text-xs font-semibold text-[#A36F1C] uppercase tracking-widest block mb-1">ADMINISTRATIVE HIERARCHY • SEMINARY HILL DESKS</span>
+                <h2 class="font-serif font-bold text-2xl sm:text-3xl text-[#0F294A]">Departmental Directory</h2>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 max-w-md">Dedicated operational units available for undergraduate, graduate, and theological inquiries.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Card 1 */}
+              <div class="bg-white rounded-sm p-6 shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col justify-between">
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-sm bg-[#0F294A] text-white flex items-center justify-center">
+                      <span class="material-symbols-outlined text-xl">school</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-semibold">Open Tuesdays</span>
+                  </div>
+                  <div>
+                    <h3 class="font-serif font-bold text-base text-[#0F294A]">LAP Undergraduate Office</h3>
+                    <p class="text-xs text-slate-500">BA & BSc Admissions (6 Majors)</p>
+                  </div>
+                  <div class="space-y-1.5 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-[#0F294A]">call</span>
+                      <a href="tel:+959441684406" class="hover:underline font-medium">+95 9 441 684 406</a>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-[#0F294A]">mail</span>
+                      <a href="mailto:admissionlap.mit@gmail.com" class="hover:underline truncate font-medium">admissionlap.mit@gmail.com</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between">
+                  <span>Location:</span>
+                  <span class="font-bold text-[#0F294A]">Goodenough Hall</span>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div class="bg-white rounded-sm p-6 shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col justify-between">
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-sm bg-[#1B4275] text-white flex items-center justify-center">
+                      <span class="material-symbols-outlined text-xl">workspace_premium</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[11px] font-semibold">Mon–Fri</span>
+                  </div>
+                  <div>
+                    <h3 class="font-serif font-bold text-base text-[#0F294A]">LAP Graduate Office</h3>
+                    <p class="text-xs text-slate-500">MBA, MM, MACD, MAPS & MAID</p>
+                  </div>
+                  <div class="space-y-1.5 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-[#1B4275]">call</span>
+                      <a href="tel:+959961409339" class="hover:underline font-medium">+95 9 961 409 339</a>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-[#1B4275]">mail</span>
+                      <a href="mailto:admissionlapmaprogram.mit@gmail.com" class="hover:underline truncate font-medium">admissionlapmaprogram.mit@gmail.com</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between">
+                  <span>Postgraduate:</span>
+                  <span class="font-bold text-[#0F294A]">Admin Wing</span>
+                </div>
+              </div>
+
+              {/* Card 3 */}
+              <div class="bg-white rounded-sm p-6 shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col justify-between">
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-sm bg-[#C58A2C] text-white flex items-center justify-center">
+                      <span class="material-symbols-outlined text-xl">business_center</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-[11px] font-semibold">Evening Weekend</span>
+                  </div>
+                  <div>
+                    <h3 class="font-serif font-bold text-base text-[#0F294A]">Business Studies Dept</h3>
+                    <p class="text-xs text-slate-500">Executive HR Leadership Series</p>
+                  </div>
+                  <div class="space-y-1.5 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-[#C58A2C]">mail</span>
+                      <a href="mailto:lap.businessdept@gmail.com" class="hover:underline truncate font-medium">lap.businessdept@gmail.com</a>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-[#C58A2C]">schedule</span>
+                      <span class="truncate">Fri & Sat: 6:00 PM – 9:00 PM</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between">
+                  <span>Format:</span>
+                  <span class="font-bold text-[#C58A2C]">Virtual / Zoom</span>
+                </div>
+              </div>
+
+              {/* Card 4 */}
+              <div class="bg-white rounded-sm p-6 shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col justify-between">
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-sm bg-slate-800 text-white flex items-center justify-center">
+                      <span class="material-symbols-outlined text-xl">account_balance</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-[11px] font-semibold">Campus HQ</span>
+                  </div>
+                  <div>
+                    <h3 class="font-serif font-bold text-base text-[#0F294A]">Central Administration</h3>
+                    <p class="text-xs text-slate-500">Official Archives & Campus Logistics</p>
+                  </div>
+                  <div class="space-y-1.5 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-slate-700">call</span>
+                      <a href="tel:+951641388" class="hover:underline font-medium">+95-1-641388</a>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-slate-700">mail</span>
+                      <a href="mailto:administration@mit.edu.mm" class="hover:underline truncate font-medium">administration@mit.edu.mm</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between">
+                  <span>Switchboard:</span>
+                  <span class="font-bold text-[#0F294A]">Admin Block 1F</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Form & Advisory Panel */}
+          <section class="max-w-7xl mx-auto px-4 sm:px-8 py-8" id="contact-form">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* Form Left */}
+              <div class="lg:col-span-7 bg-white rounded-sm border border-slate-200 p-8 shadow-sm">
+                <div class="mb-6 border-b border-slate-100 pb-4">
+                  <span class="text-xs font-semibold text-[#A36F1C] uppercase tracking-wider block mb-1">Direct Correspondence</span>
+                  <h2 class="font-serif font-bold text-2xl text-[#0F294A]">Send an Inquiry to MIT</h2>
+                </div>
+                <form class="space-y-4" onSubmit={handleSubmit}>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1" htmlFor="name">Full Name *</label>
+                    <input id="name" required type="text" placeholder="e.g. Saw Joseph Aung / Nang Seng Mai" class="w-full bg-slate-50 border border-slate-200 rounded-sm px-4 py-2.5 text-sm focus:bg-white focus:outline-none focus:border-[#0F294A]" />
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1" htmlFor="email">Email Address *</label>
+                      <input id="email" required type="email" placeholder="your.name@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-sm px-4 py-2.5 text-sm focus:bg-white focus:outline-none focus:border-[#0F294A]" />
+                    </div>
+                    <div>
+                      <label class="block text-xs font-semibold text-slate-700 mb-1" htmlFor="phone">Phone Number</label>
+                      <input id="phone" type="tel" placeholder="+95 9 ---------" class="w-full bg-slate-50 border border-slate-200 rounded-sm px-4 py-2.5 text-sm focus:bg-white focus:outline-none focus:border-[#0F294A]" />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1" htmlFor="program">Program of Interest *</label>
+                    <select id="program" required class="w-full bg-slate-50 border border-slate-200 rounded-sm px-4 py-2.5 text-sm focus:bg-white focus:outline-none focus:border-[#0F294A]">
+                      <option value="">Select an academic track or subject...</option>
+                      <option value="undergrad">Undergraduate (BA / BSc - 6 Majors)</option>
+                      <option value="graduate">Graduate Programs (MBA, MM, MACD, MAPS)</option>
+                      <option value="executive">Executive HR Leadership Certificate Series</option>
+                      <option value="theology">Theology Program (Ph.D., D.Min., M.Div.)</option>
+                      <option value="general">General Institutional Query</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1" htmlFor="message">Your Message *</label>
+                    <textarea id="message" rows="4" required placeholder="Provide details regarding your educational background or questions..." class="w-full bg-slate-50 border border-slate-200 rounded-sm p-3 text-sm focus:bg-white focus:outline-none focus:border-[#0F294A]"></textarea>
+                  </div>
+                  <button type="submit" class="w-full py-3 bg-[#0F294A] hover:bg-slate-900 text-white font-semibold text-sm rounded-sm transition flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">send</span>
+                    <span>Send Inquiry to MIT →</span>
+                  </button>
+                </form>
+              </div>
+
+              {/* Advisories Right */}
+              <div class="lg:col-span-5 space-y-4">
+                <div class="bg-blue-50/70 border border-blue-100 rounded-sm p-5 shadow-sm space-y-2">
+                  <h3 class="font-serif font-bold text-sm text-[#0F294A] flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-blue-600 text-lg">schedule</span>
+                    Admissions Support SLA
+                  </h3>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    All submitted official inquiries are processed directly by our academic registrars within <strong>24 to 48 business hours</strong> (excluding Sunday sabbath).
+                  </p>
+                </div>
+
+                <div class="bg-amber-50/80 border border-amber-200 rounded-sm p-5 shadow-sm space-y-2">
+                  <h3 class="font-serif font-bold text-sm text-[#0F294A] flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-amber-600 text-lg">notification_important</span>
+                    Urgent Admissions Window
+                  </h3>
+                  <p class="text-xs text-slate-700 leading-relaxed">
+                    For immediate exam verification, dial the LAP desk at <a href="tel:+959441684406" class="font-semibold underline">+95 9 441 684 406</a>.
+                  </p>
+                </div>
+
+                <div class="bg-white border-2 border-[#C58A2C]/60 rounded-sm p-5 shadow-sm space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-[#A36F1C] uppercase tracking-wider">Critical Timetable</span>
+                    <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold">AY 2026–2027</span>
+                  </div>
+                  <h4 class="font-serif font-bold text-base text-[#0F294A]">Entrance Examination</h4>
+                  <div class="text-xl font-bold text-[#0F294A]">19 September 2026</div>
+                  <p class="text-xs text-slate-600">Entrance Examination is scheduled on campus. Late submissions not considered.</p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-sm p-5 shadow-sm space-y-2">
+                  <span class="text-xs font-bold text-[#0F294A] uppercase tracking-wider block">Walk-in Inquiry Schedule</span>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    In-person consultation accommodated on <strong>Tuesdays from 10:00 AM to 5:00 PM</strong> at Goodenough Hall on Seminary Hill.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Printable Document Clearinghouse */}
+          <section class="max-w-7xl mx-auto px-4 sm:px-8 py-14">
+            <div class="py-14 px-6 md:px-10 rounded-sm relative overflow-hidden shadow-2xl bg-[#061528] text-white">
+              <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-amber-500/10 border border-amber-500/30 text-amber-300 mb-3">
+                  📄 PRINTABLE DOCUMENT CLEARINGHOUSE
+                </span>
+                <h2 class="font-serif font-bold text-2xl md:text-3xl text-white">Official Admissions Documents (2026–2027)</h2>
+                <p class="text-slate-300 text-xs sm:text-sm mt-2">Download printable PDF application packets. Final deadline for completed document dossiers is <strong>31 July 2026</strong>.</p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white/10 backdrop-blur-md rounded-sm p-6 border border-white/20 flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono text-slate-300 bg-white/10 px-2 py-0.5 rounded-sm">PDF • 3.2 MB</span>
+                    <h3 class="font-serif font-bold text-lg text-white mt-3 mb-2">Undergraduate Form (BA / BSc)</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">Covers enrollment across 6 majors, recommendation slips, and exam registration.</p>
+                  </div>
+                  <button onClick={() => alert('Downloading Undergraduate Form (Mock PDF)')} class="mt-6 w-full py-2.5 rounded-sm bg-[#DEB54A] hover:bg-[#C49A2C] text-slate-950 font-bold text-xs shadow transition flex items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm">download</span>
+                    <span>Download PDF</span>
+                  </button>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md rounded-sm p-6 border border-white/20 flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono text-slate-300 bg-white/10 px-2 py-0.5 rounded-sm">PDF • 4.1 MB</span>
+                    <h3 class="font-serif font-bold text-lg text-white mt-3 mb-2">Graduate Form (MBA & MA)</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">Requirements for MBA, MM, MACD, MAPS, MAID, MAGS, and MSS candidates.</p>
+                  </div>
+                  <button onClick={() => alert('Downloading Graduate Form (Mock PDF)')} class="mt-6 w-full py-2.5 rounded-sm bg-[#DEB54A] hover:bg-[#C49A2C] text-slate-950 font-bold text-xs shadow transition flex items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm">download</span>
+                    <span>Download PDF</span>
+                  </button>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md rounded-sm p-6 border border-white/20 flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono text-slate-300 bg-white/10 px-2 py-0.5 rounded-sm">PDF • 1.8 MB</span>
+                    <h3 class="font-serif font-bold text-lg text-white mt-3 mb-2">Executive HR Syllabus</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">Executive course modules, weekend schedules, and application profile questionnaires.</p>
+                  </div>
+                  <button onClick={() => alert('Downloading Executive HR Syllabus (Mock PDF)')} class="mt-6 w-full py-2.5 rounded-sm bg-[#DEB54A] hover:bg-[#C49A2C] text-slate-950 font-bold text-xs shadow transition flex items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm">download</span>
+                    <span>Download PDF</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Campus Map & Transit Details */}
+          <section class="max-w-7xl mx-auto px-6 py-12">
+            <div class="mb-8">
+              <span class="text-xs font-semibold text-[#A36F1C] uppercase tracking-widest block mb-1">GEOGRAPHY & TRANSIT</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-[#0F294A]">Campus Location & Visitor Directions</h2>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+              <div class="lg:col-span-7 relative min-h-[360px] rounded-sm overflow-hidden border border-slate-200 shadow-sm">
+                <img alt="Seminary Hill Map" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmWY7TQeUKlc4hdxIoE7C_Uz3Jq2DoAOMpfu69xuo2zxXR_lPj9gldqz8T_W2TR8NB10-KarNsOJLYz7QYtXB8TDJTvZ50j3px6FqA4R7-4snQ0_ddXu2OTFM9K_Bten-DN2GhP1G1jKbKPRw-t1i5iabuUd8H1G6aBUZbODoWBZ1bWjBNi5Q68LK1h24tZkk0QOaJzXP9c_EOB7tddx2C1ml3eYPrbE0NoG273EKcPdFfpljK5E_flq1bfGVW6tLzwl6aw3xJiDzXaA" />
+                <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-sm p-4 border border-slate-200 shadow flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div>
+                    <h4 class="font-serif font-bold text-sm text-[#0B2240]">Myanmar Institute of Theology (MIT)</h4>
+                    <p class="text-xs text-slate-500">Seminary Hill, Insein Township 11011, Yangon</p>
+                  </div>
+                  <a href="https://maps.google.com/?q=Myanmar+Institute+of+Theology+Insein" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 bg-[#0B2240] text-white text-xs px-3.5 py-1.5 rounded-sm font-semibold hover:bg-slate-900 transition">
+                    Open Google Maps ↗
+                  </a>
+                </div>
+              </div>
+
+              <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+                <div class="bg-white rounded-sm p-5 border border-slate-200 shadow-sm">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[11px] font-bold tracking-wider uppercase text-slate-500">Official Postal Address</span>
+                    <button onClick={handleCopy} class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 px-2 py-0.5 rounded-sm transition">
+                      {copiedAddress ? 'Copied!' : 'Copy Address'}
+                    </button>
+                  </div>
+                  <div class="font-bold text-sm text-[#0B2240]">Myanmar Institute of Theology (MIT)</div>
+                  <div class="text-xs text-slate-600 mt-0.5">Seminary Hill, Insein Township 11011, Yangon, Myanmar</div>
+                  <div class="text-xs text-slate-500 font-myanmar mt-2 pt-2 border-t border-slate-100">
+                    မြန်မာနိုင်ငံဓမ္မတက္ကသိုလ်၊ ဆီမင်နရီကုန်းတော်၊ အင်းစိန်မြို့နယ်၊ ရန်ကုန်မြို့။
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-sm p-5 border border-slate-200 shadow-sm">
+                  <span class="text-[11px] font-bold tracking-wider uppercase text-slate-500 block mb-1">Transit & Ride-Hailing Guide</span>
+                  <p class="text-xs text-slate-600">Enter destination pin into taxi apps:</p>
+                  <span class="font-semibold text-xs text-[#0B2240] bg-slate-100 px-2 py-0.5 rounded-sm inline-block my-1">
+                    "Myanmar Institute of Theology (MIT), Insein"
+                  </span>
+                  <p class="text-[11px] text-slate-500 leading-normal">Gate access climbs Seminary Hill directly from Lower Mingaladon Road.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Success Modal */}
+          {formSubmitted && (
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+              <div class="bg-white max-w-md w-full rounded-sm p-8 text-center shadow-2xl space-y-4 border border-slate-200">
+                <div class="w-14 h-14 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center mx-auto">
+                  <span class="material-symbols-outlined text-3xl">mark_email_read</span>
+                </div>
+                <h3 class="font-serif font-bold text-xl text-[#0F294A]">Inquiry Dispatched</h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Thank you for writing to Myanmar Institute of Theology. Your inquiry has been forwarded to admissions. An officer will respond within 24–48 business hours.
+                </p>
+                <button class="w-full py-2.5 rounded-sm bg-[#0F294A] text-white font-semibold text-xs hover:bg-slate-900 transition" onClick={() => setFormSubmitted(false)}>
+                  Close Window
+                </button>
+              </div>
+            </div>
+          )}
+        </main>
+      );
+    }
+
+    // -------------------------------------------------------------
+    // MAIN APP ROUTER COMPONENT
+    // -------------------------------------------------------------
+    function App() {
+      return (
+        <div class="min-h-screen flex flex-col justify-between">
+          <NavigationBar />
+          <div class="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/programs" element={<ProgramsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              {/* Fallback route */}
+              <Route path="*" element={<HomePage />} />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+      );
+    }
+
+    // Top-level MemoryRouter wrap
+    const container = document.getElementById('root');
+    const root = createRoot(container);
+    root.render(
+      <MemoryRouter initialEntries={["/"]}>
+        <App />
+      </MemoryRouter>
+    );
+  </script>
+</body>
+</html>
